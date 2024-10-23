@@ -4,7 +4,7 @@ import {UploadOutlined} from '@ant-design/icons';
 import axios from 'axios';
 
 export default function Admin() {
-    const [loading, setLoading] = useState(false); // For button loading state
+    const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
         const formData = new FormData();
@@ -16,7 +16,6 @@ export default function Admin() {
 
         setLoading(true);
         try {
-            // Post the form data to the API
             const response = await axios.post('https://vip-card.onrender.com/api/api/v1/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',

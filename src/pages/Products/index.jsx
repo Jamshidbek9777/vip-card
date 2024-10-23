@@ -1,11 +1,13 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Card, Row, Col} from "antd";
+import {useNavigate} from "react-router-dom";
 
 export default function Products() {
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState();
+    const [error, setError] = useState(null);
+    const navigate = useNavigate(); // Hook for navigation
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,8 +29,13 @@ export default function Products() {
     }
 
     if (error) {
-        return <div>{error}</div>; // Show error message if there's an error
+        return <div>{error}</div>;
     }
+
+    // Function to handle click and navigate to product detail page
+    const handleCardClick = (id) => {
+        navigate(`/product/${id}`); // Navigate to the product detail page with ID
+    };
 
     return (
         <div style={{padding: '20px'}}>
@@ -40,6 +47,7 @@ export default function Products() {
                             cover={<img alt={item.name} src={item.image}
                                         style={{height: '200px', objectFit: 'cover'}}/>}
                             style={{borderRadius: '10px', overflow: 'hidden'}}
+                            onClick={() => handleCardClick(item.id)} // Handle click event
                         >
                             <Card.Meta title={item.name} description={item.description}/>
                             <p style={{marginTop: '10px'}}>

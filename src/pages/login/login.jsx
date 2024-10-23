@@ -3,19 +3,16 @@ import axios from 'axios';
 import "./style.css";
 
 const onFinish = (values) => {
-    // Make a POST request to the login endpoint
     axios.post('https://vip-card.onrender.com/api/api/v1/custom_auth/token/', {
         username: values.username,
         password: values.password,
     })
         .then(response => {
-            // Handle successful login response
-            const accessToken = response.data.token;  // assuming token is returned in the response
+            const accessToken = response.data.token;
             localStorage.setItem('access_token', accessToken);
-            window.location.href = '/admin';  // Redirect to the admin page
+            window.location.href = '/admin';
         })
         .catch(error => {
-            // Handle error in case of login failure
             console.error('Login failed:', error);
         });
 };
